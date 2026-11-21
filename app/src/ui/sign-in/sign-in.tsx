@@ -15,6 +15,7 @@ import { OkCancelButtonGroup } from '../dialog/ok-cancel-button-group'
 import { Ref } from '../lib/ref'
 import { PopupType } from '../../models/popup'
 import { getHTMLURL } from '../../lib/api'
+import { t } from '../../lib/i18n'
 import {
   EnterpriseServerConfirmation,
   enterpriseServerConfirmationDescriptionId,
@@ -30,17 +31,16 @@ interface ISignInState {
   readonly endpoint: string
 }
 
-const SignInWithBrowserTitle = __DARWIN__
-  ? 'Sign in Using Your Browser'
-  : 'Sign in using your browser'
+const SignInWithBrowserTitle = t(
+  'signIn.browserTitle',
+  __DARWIN__ ? 'Sign in Using Your Browser' : 'Sign in using your browser'
+)
 
-const DefaultTitle = 'Sign in'
+const DefaultTitle = t('signIn.title', 'Sign in')
 
 const browserSignInInfoContent = (
   <p>
-    Your browser will redirect you back to GitHub Desktop once you've signed in.
-    If your browser asks for your permission to launch GitHub Desktop, please
-    allow it.
+    {t('signIn.browserInfo', "Your browser will redirect you back to GitHub Desktop once you've signed in. If your browser asks for your permission to launch GitHub Desktop, please allow it.")}
   </p>
 )
 
@@ -115,14 +115,15 @@ export class SignIn extends React.Component<ISignInProps, ISignInState> {
 
     let primaryButtonText: string
     const stepKind = state.kind
-    const continueWithBrowserLabel = __DARWIN__
-      ? 'Continue With Browser'
-      : 'Continue with browser'
+    const continueWithBrowserLabel = t(
+      'signIn.continueBrowser',
+      __DARWIN__ ? 'Continue With Browser' : 'Continue with browser'
+    )
 
     switch (state.kind) {
       case SignInStep.EndpointEntry:
         disableSubmit = this.state.endpoint.length === 0
-        primaryButtonText = 'Continue'
+        primaryButtonText = t('signIn.continue', 'Continue')
         break
       case SignInStep.Authentication:
         primaryButtonText = continueWithBrowserLabel
@@ -148,7 +149,7 @@ export class SignIn extends React.Component<ISignInProps, ISignInState> {
       <DialogContent>
         <Row>
           <TextBox
-            label="Enterprise address"
+            label={t('signIn.enterpriseAddress', 'Enterprise address')}
             value={this.state.endpoint}
             onValueChanged={this.onEndpointChanged}
             placeholder="https://example.ghe.com"
