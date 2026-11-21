@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { t } from '../../lib/i18n'
 
 import { PullRequest } from '../../models/pull-request'
 import {
@@ -184,10 +185,10 @@ export class BranchesContainer extends React.Component<
         <Button
           className="merge-button"
           onClick={this.onMergeClick}
-          tooltip={`Choose a branch to merge into ${currentBranch.name}`}
+          tooltip={`${t('branches.mergeInto', 'Choose a branch to merge into this branch')}: ${currentBranch.name}`}
         >
           <Octicon className="icon" symbol={octicons.gitMerge} />
-          Choose a branch to merge into <strong>{currentBranch.name}</strong>
+          {t('branches.mergeInto', 'Choose a branch to merge into')} <strong>{currentBranch.name}</strong>
         </Button>
       </Row>
     )
@@ -214,9 +215,9 @@ export class BranchesContainer extends React.Component<
         selectedIndex={this.props.selectedTab}
         allowDragOverSwitching={true}
       >
-        <span id="branches-tab">Branches</span>
+        <span id="branches-tab">{t('branches.branches', 'Branches')}</span>
         <span id="pull-requests-tab" className="pull-request-tab">
-          {__DARWIN__ ? 'Pull Requests' : 'Pull requests'}
+          {t('branches.pullRequests', __DARWIN__ ? 'Pull Requests' : 'Pull requests')}
           {this.renderOpenPullRequestsBubble()}
         </span>
       </TabBar>
