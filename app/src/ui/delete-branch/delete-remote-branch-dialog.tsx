@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { t } from '../../lib/i18n'
 
 import { Dispatcher } from '../dispatcher'
 import { Repository } from '../../models/repository'
@@ -33,7 +34,7 @@ export class DeleteRemoteBranch extends React.Component<
     return (
       <Dialog
         id="delete-branch"
-        title={__DARWIN__ ? 'Delete Remote Branch' : 'Delete remote branch'}
+        title={t('branch.deleteRemoteTitle', __DARWIN__ ? 'Delete Remote Branch' : 'Delete remote branch')}
         type="warning"
         onSubmit={this.deleteBranch}
         onDismissed={this.props.onDismissed}
@@ -45,18 +46,17 @@ export class DeleteRemoteBranch extends React.Component<
         <DialogContent>
           <div id="delete-branch-confirmation-message">
             <p>
-              Delete remote branch <Ref>{this.props.branch.name}</Ref>?
+              {t('branch.deleteRemoteQuestion', 'Delete remote branch')} <Ref>{this.props.branch.name}</Ref>?
             </p>
-            <p>This action cannot be undone.</p>
+            <p>{t('branch.cannotUndo', 'This action cannot be undone.')}</p>
 
             <p>
-              This branch does not exist locally. Deleting it may impact others
-              collaborating on this branch.
+              {t('branch.remoteOnlyWarning', 'This branch does not exist locally. Deleting it may impact others collaborating on this branch.')}
             </p>
           </div>
         </DialogContent>
         <DialogFooter>
-          <OkCancelButtonGroup destructive={true} okButtonText="Delete" />
+          <OkCancelButtonGroup destructive={true} okButtonText={t('branch.deleteAction', 'Delete')} />
         </DialogFooter>
       </Dialog>
     )
