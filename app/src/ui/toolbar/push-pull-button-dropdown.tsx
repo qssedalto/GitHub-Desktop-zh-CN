@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from '../lib/button'
+import { t } from '../../lib/i18n'
 import { Octicon, syncClockwise } from '../octicons'
 import {
   DropdownItem,
@@ -71,7 +72,7 @@ export class PushPullButtonDropDown extends React.Component<IPushPullButtonDropD
     switch (type) {
       case DropdownItemType.Fetch:
         return {
-          title: `Fetch ${remoteName}`,
+          title: `${t('sync.fetch', 'Fetch')} ${remoteName}`,
           description: `Fetch the latest changes from ${remoteName}`,
           action: this.props.fetch,
           icon: syncClockwise,
@@ -87,7 +88,7 @@ export class PushPullButtonDropDown extends React.Component<IPushPullButtonDropD
           </div>
         )
         return {
-          title: `Force push ${remoteName}`,
+          title: `${t('sync.forcePush', 'Force push')} ${remoteName}`,
           description: (
             <>
               Overwrite any changes on {remoteName} with your local changes
