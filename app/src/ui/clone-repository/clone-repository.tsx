@@ -1,5 +1,6 @@
 import * as Path from 'path'
 import * as React from 'react'
+import { t } from '../../lib/i18n'
 import { Dispatcher } from '../dispatcher'
 import { getDefaultDir, setDefaultDir } from '../lib/default-dir'
 import {
@@ -297,7 +298,7 @@ export class CloneRepository extends React.Component<
     return (
       <Dialog
         className="clone-repository"
-        title={__DARWIN__ ? 'Clone a Repository' : 'Clone a repository'}
+        title={t('clone.title', __DARWIN__ ? 'Clone a Repository' : 'Clone a repository')}
         onSubmit={this.clone}
         onDismissed={this.props.onDismissed}
         loading={this.state.loading}
@@ -369,7 +370,7 @@ export class CloneRepository extends React.Component<
 
     return (
       <DialogFooter>
-        <OkCancelButtonGroup okButtonText="Clone" okButtonDisabled={disabled} />
+        <OkCancelButtonGroup okButtonText={t('repos.clone', 'Clone')} okButtonDisabled={disabled} />
       </DialogFooter>
     )
   }
@@ -559,19 +560,17 @@ export class CloneRepository extends React.Component<
   }
 
   private renderSignIn() {
-    const signInTitle = __DARWIN__ ? 'Sign In' : 'Sign in'
+    const signInTitle = t('clone.signIn', __DARWIN__ ? 'Sign In' : 'Sign in')
     return (
       <>
         <CallToAction actionTitle={signInTitle} onAction={this.signInDotCom}>
           <div>
-            Sign in to your GitHub.com account to access your repositories.
+            {t('clone.signInDesc', 'Sign in to your GitHub.com account to access your repositories.')}
           </div>
         </CallToAction>
         <Row className="sign-in-enterprise">
           <LinkButton onClick={this.signInEnterprise}>
-            {__DARWIN__
-              ? 'Sign In to GitHub Enterprise'
-              : 'Sign in to GitHub Enterprise'}
+            {t('clone.signInEnterprise', __DARWIN__ ? 'Sign In to GitHub Enterprise' : 'Sign in to GitHub Enterprise')}
           </LinkButton>
         </Row>
       </>
@@ -672,8 +671,8 @@ export class CloneRepository extends React.Component<
     const tabState = this.getSelectedTabState()
 
     const path = await showSaveDialog({
-      buttonLabel: 'Select',
-      nameFieldLabel: 'Clone As:',
+      buttonLabel: t('clone.select', 'Select'),
+      nameFieldLabel: t('clone.as', 'Clone As:'),
       showsTagField: false,
       defaultPath: tabState.path ?? '',
       properties: ['createDirectory'],
