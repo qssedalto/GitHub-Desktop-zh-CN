@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { t } from '../../lib/i18n'
 
 import { encodePathAsUrl } from '../../lib/path'
 import { Repository } from '../../models/repository'
@@ -435,11 +436,11 @@ export class NoChanges extends React.Component<
     return (
       <MenuBackedSuggestedAction
         key="view-stash-action"
-        title="View your stashed changes"
+        title={t('noChanges.viewStash', 'View your stashed changes')}
         menuItemId={itemId}
         description={description}
         discoverabilityContent={discoverabilityContent}
-        buttonText="View stash"
+        buttonText={t('noChanges.viewStashButton', 'View stash')}
         type="primary"
         disabled={menuItem !== null && !menuItem.enabled}
         onClick={this.onViewStashClicked}
@@ -473,10 +474,10 @@ export class NoChanges extends React.Component<
     return (
       <MenuBackedSuggestedAction
         key="publish-repository-action"
-        title="Publish your repository to GitHub"
-        description="This repository is currently only available on your local machine. By publishing it on GitHub you can share it, and collaborate with others."
+        title={t('noChanges.publishRepo', 'Publish your repository to GitHub')}
+        description={t('noChanges.publishRepoDescription', 'This repository is currently only available on your local machine. By publishing it on GitHub you can share it, and collaborate with others.')}
         discoverabilityContent={discoverabilityContent}
-        buttonText="Publish repository"
+        buttonText={t('noChanges.publishRepoButton', 'Publish repository')}
         menuItemId={itemId}
         type="primary"
         disabled={!menuItem.enabled}
@@ -522,11 +523,11 @@ export class NoChanges extends React.Component<
     return (
       <MenuBackedSuggestedAction
         key="publish-branch-action"
-        title="Publish your branch"
+        title={t('noChanges.publishBranch', 'Publish your branch')}
         menuItemId={itemId}
         description={description}
         discoverabilityContent={discoverabilityContent}
-        buttonText="Publish branch"
+        buttonText={t('sync.publishBranch', 'Publish branch')}
         type="primary"
         disabled={!menuItem.enabled}
         onClick={this.onPublishBranchClicked}
