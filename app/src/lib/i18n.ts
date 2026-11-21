@@ -182,8 +182,8 @@ const zhCN = {
   "changes.changedFiles": "个已更改文件",
   "changes.of": "个可见，共",
   "changes.discardAll": "丢弃所有更改…",
-  "changes.stashAll": "暂存所有更改",
-  "changes.stashAllConfirm": "暂存所有更改…",
+  "changes.stashAll": "储藏所有更改",
+  "changes.stashAllConfirm": "储藏所有更改…",
   "changes.discard": "丢弃更改",
   "changes.discardSelected": "丢弃所选更改",
   "clone.title": "克隆仓库",
@@ -234,6 +234,7 @@ const zhCN = {
   "repositories.cloneAction": "克隆仓库…",
   "repositories.createNewAction": "创建新仓库…",
   "repositories.addExistingAction": "添加现有仓库…",
+  "repositories.refresh": "刷新仓库列表",
 } as const
 
 export type TranslationKey = keyof typeof zhCN
@@ -243,9 +244,18 @@ export type TranslationKey = keyof typeof zhCN
  * An unsupported or missing locale falls back to English.
  */
 export function getAppLanguage(): AppLanguage {
-  const saved = localStorage.getItem(languageStorageKey)
-  if (saved === 'en' || saved === 'zh-CN') {
-    return saved
+  // A module can also be imported by unit tests outside Electron's renderer.
+  // Storage access may be unavailable or restricted there.
+  try {
+    const saved =
+      typeof localStorage === 'undefined'
+        ? null
+        : localStorage.getItem(languageStorageKey)
+    if (saved === 'en' || saved === 'zh-CN') {
+      return saved
+    }
+  } catch {
+    // Ignore inaccessible storage and fall back to the system language.
   }
 
   return typeof navigator !== 'undefined' &&
