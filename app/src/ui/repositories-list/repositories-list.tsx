@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { t } from '../../lib/i18n'
 
 import { commitGrammar, RepositoryListItem } from './repository-list-item'
 import {
@@ -421,10 +422,10 @@ export class RepositoriesList extends React.Component<
     return (
       <div className="no-items no-results-found">
         <img src={BlankSlateImage} className="blankslate-image" alt="" />
-        <div className="title">Sorry, I can't find that repository</div>
+        <div className="title">{t('repositories.notFound', "Sorry, I can't find that repository")}</div>
 
         <div className="protip">
-          ProTip! Press{' '}
+          {t('repositories.proTip', 'ProTip! Press')}{' '}
           <div className="kbd-shortcut">
             <KeyboardShortcut darwinKeys={['⌘', 'O']} keys={['Ctrl', 'O']} />
           </div>{' '}
@@ -444,17 +445,15 @@ export class RepositoriesList extends React.Component<
   private onNewRepositoryButtonClick = () => {
     const items: IMenuItem[] = [
       {
-        label: __DARWIN__ ? 'Clone Repository…' : 'Clone repository…',
+        label: t('repositories.cloneAction', __DARWIN__ ? 'Clone Repository…' : 'Clone repository…'),
         action: this.onCloneRepository,
       },
       {
-        label: __DARWIN__ ? 'Create New Repository…' : 'Create new repository…',
+        label: t('repositories.createNewAction', __DARWIN__ ? 'Create New Repository…' : 'Create new repository…'),
         action: this.onCreateNewRepository,
       },
       {
-        label: __DARWIN__
-          ? 'Add Existing Repository…'
-          : 'Add existing repository…',
+        label: t('repositories.addExistingAction', __DARWIN__ ? 'Add Existing Repository…' : 'Add existing repository…'),
         action: this.onAddExistingRepository,
       },
     ]
