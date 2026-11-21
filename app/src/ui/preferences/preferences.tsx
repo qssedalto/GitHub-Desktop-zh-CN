@@ -81,6 +81,7 @@ import {
 } from '../../models/formatting-preferences'
 import { enableFormattingPreferences } from '../../lib/feature-flag'
 import { validateCopilotAppPath } from '../../lib/copilot-app'
+import { t } from '../../lib/i18n'
 
 interface IPreferencesProps {
   readonly dispatcher: Dispatcher
@@ -380,7 +381,7 @@ export class Preferences extends React.Component<
     return (
       <Dialog
         id="preferences"
-        title={__DARWIN__ ? 'Settings' : 'Options'}
+        title={__DARWIN__ ? t('preferences.settings', 'Settings') : t('preferences.options', 'Options')}
         onDismissed={this.onCancel}
         onSubmit={this.onSave}
       >
@@ -393,15 +394,15 @@ export class Preferences extends React.Component<
           >
             <span id={this.getTabId(PreferencesTab.Accounts)}>
               <Octicon className="icon" symbol={octicons.home} />
-              Accounts
+              {t('preferences.accounts', 'Accounts')}
             </span>
             <span id={this.getTabId(PreferencesTab.Integrations)}>
               <Octicon className="icon" symbol={octicons.person} />
-              Integrations
+              {t('preferences.integrations', 'Integrations')}
             </span>
             <span id={this.getTabId(PreferencesTab.Copilot)}>
               <Octicon className="icon" symbol={octicons.copilot} />
-              Copilot
+              {t('preferences.copilot', 'Copilot')}
             </span>
             <span id={this.getTabId(PreferencesTab.Git)}>
               <Octicon className="icon" symbol={octicons.gitCommit} />
@@ -409,23 +410,23 @@ export class Preferences extends React.Component<
             </span>
             <span id={this.getTabId(PreferencesTab.Appearance)}>
               <Octicon className="icon" symbol={octicons.paintbrush} />
-              Appearance
+              {t('preferences.appearance', 'Appearance')}
             </span>
             <span id={this.getTabId(PreferencesTab.Notifications)}>
               <Octicon className="icon" symbol={octicons.bell} />
-              Notifications
+              {t('preferences.notifications', 'Notifications')}
             </span>
             <span id={this.getTabId(PreferencesTab.Prompts)}>
               <Octicon className="icon" symbol={octicons.question} />
-              Prompts
+              {t('preferences.prompts', 'Prompts')}
             </span>
             <span id={this.getTabId(PreferencesTab.Advanced)}>
               <Octicon className="icon" symbol={octicons.gear} />
-              Advanced
+              {t('preferences.advanced', 'Advanced')}
             </span>
             <span id={this.getTabId(PreferencesTab.Accessibility)}>
               <Octicon className="icon" symbol={octicons.accessibility} />
-              Accessibility
+              {t('preferences.accessibility', 'Accessibility')}
             </span>
           </TabBar>
 

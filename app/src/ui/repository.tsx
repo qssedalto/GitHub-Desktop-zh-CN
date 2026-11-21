@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { t } from '../../lib/i18n'
 import { Repository } from '../models/repository'
 import { Commit, CommitOneLine } from '../models/commit'
 import { TipState } from '../models/tip'
@@ -225,12 +226,12 @@ export class RepositoryView extends React.Component<
     return (
       <TabBar selectedIndex={selectedTab} onTabClicked={this.onTabClicked}>
         <span className="with-indicator" id="changes-tab">
-          <span>Changes</span>
+          <span>{t('repository.changes', 'Changes')}</span>
           {this.renderChangesBadge()}
         </span>
 
         <div className="with-indicator" id="history-tab">
-          <span>History</span>
+          <span>{t('repository.history', 'History')}</span>
         </div>
       </TabBar>
     )
@@ -428,7 +429,7 @@ export class RepositoryView extends React.Component<
           minimumWidth={this.props.sidebarWidth.min}
           onReset={this.handleSidebarWidthReset}
           onResize={this.handleSidebarResize}
-          description="Repository sidebar"
+          description={t('repository.sidebar', 'Repository sidebar')}
         >
           {this.renderTabs()}
           {this.renderSidebarContents()}

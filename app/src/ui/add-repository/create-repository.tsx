@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { t } from '../../lib/i18n'
 import * as Path from 'path'
 
 import { Dispatcher } from '../dispatcher'
@@ -498,7 +499,7 @@ export class CreateRepository extends React.Component<
     return (
       <Row>
         <Select
-          label={__DARWIN__ ? 'Git Ignore' : 'Git ignore'}
+          label={t('repositories.gitIgnore', __DARWIN__ ? 'Git Ignore' : 'Git ignore')}
           value={this.state.gitIgnore}
           onChange={this.onGitIgnoreChange}
         >
@@ -523,7 +524,7 @@ export class CreateRepository extends React.Component<
     return (
       <Row>
         <Select
-          label="License"
+          label={t('repositories.license', 'License')}
           value={this.state.license}
           onChange={this.onLicenseChange}
         >
@@ -553,8 +554,7 @@ export class CreateRepository extends React.Component<
 
     return (
       <DialogError>
-        Directory could not be created at this path. You may not have
-        permissions to create a directory here.
+        {t('repositories.badPath', 'Directory could not be created at this path. You may not have permissions to create a directory here.')}
       </DialogError>
     )
   }
@@ -644,7 +644,7 @@ export class CreateRepository extends React.Component<
 
     return (
       <div id="create-repo-path-msg">
-        The repository will be created at <Ref>{fullPath}</Ref>.
+        {t('repositories.willCreate', 'The repository will be created at')} <Ref>{fullPath}</Ref>{t('repositories.currentPathEnd', '.')}
       </div>
     )
   }
@@ -681,7 +681,7 @@ export class CreateRepository extends React.Component<
       <Dialog
         id="create-repository"
         title={
-          __DARWIN__ ? 'Create a New Repository' : 'Create a new repository'
+          t('repositories.create', __DARWIN__ ? 'Create a New Repository' : 'Create a new repository')
         }
         loading={this.state.creating}
         onSubmit={this.createRepository}
@@ -690,8 +690,7 @@ export class CreateRepository extends React.Component<
         {this.renderInvalidPathError()}
         {protectedDestination && (
           <DialogError>
-            Finish or cancel the assisted commit run before creating a
-            repository in this directory.
+            {t('repositories.protectedPath', 'Finish or cancel the assisted commit run before creating a repository in this directory.')}
           </DialogError>
         )}
 
@@ -710,8 +709,8 @@ export class CreateRepository extends React.Component<
             onFullPathChanged={this.onFullPathChanged}
             onNameChanged={this.onNameChanged}
             onPathChanged={this.onPathChanged}
-            namePlaceholder="repository name"
-            pathPlaceholder="repository path"
+            namePlaceholder={t('repositories.namePlaceholder', 'repository name')}
+            pathPlaceholder={t('repositories.pathPlaceholder', 'repository path')}
             nameAriaDescribedBy="existing-repository-path-error repo-sanitized-name-warning"
             pathAriaDescribedBy="existing-repository-path-error path-is-subfolder-of-repository"
           />
@@ -719,7 +718,7 @@ export class CreateRepository extends React.Component<
           <Row>
             <TextBox
               value={this.state.description}
-              label="Description"
+              label={t('repositories.description', 'Description')}
               onValueChanged={this.onDescriptionChanged}
             />
           </Row>
@@ -729,7 +728,7 @@ export class CreateRepository extends React.Component<
 
           <Row>
             <Checkbox
-              label="Initialize this repository with a README"
+              label={t('repositories.readme', 'Initialize this repository with a README')}
               value={
                 this.state.createWithReadme
                   ? CheckboxValue.On
@@ -749,7 +748,7 @@ export class CreateRepository extends React.Component<
           {this.renderPathMessage()}
           <OkCancelButtonGroup
             okButtonText={
-              __DARWIN__ ? 'Create Repository' : 'Create repository'
+              t('repositories.createAction', __DARWIN__ ? 'Create Repository' : 'Create repository')
             }
             okButtonDisabled={disabled}
             okButtonAriaDescribedBy="create-repo-path-msg"

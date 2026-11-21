@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { t } from '../../lib/i18n'
 
 import { Dispatcher } from '../dispatcher'
 import { Repository } from '../../models/repository'
@@ -66,7 +67,7 @@ export class RenameBranch extends React.Component<
     return (
       <Dialog
         id="rename-branch"
-        title={__DARWIN__ ? 'Rename Branch' : 'Rename branch'}
+        title={t('branch.renameTitle', __DARWIN__ ? 'Rename Branch' : 'Rename branch')}
         onDismissed={this.props.onDismissed}
         onSubmit={this.renameBranch}
         focusCloseButtonOnOpen={true}
@@ -74,7 +75,7 @@ export class RenameBranch extends React.Component<
         <DialogContent>
           {renderBranchHasRemoteWarning(this.props.branch)}
           <RefNameTextBox
-            label="Name"
+            label={t('branch.name', 'Name')}
             ariaDescribedBy={hasError ? this.ERRORS_ID : undefined}
             initialValue={this.props.branch.name}
             onValueChange={this.onNameChange}
@@ -89,7 +90,7 @@ export class RenameBranch extends React.Component<
 
         <DialogFooter>
           <OkCancelButtonGroup
-            okButtonText={`Rename ${this.props.branch.name}`}
+            okButtonText={`${t('branch.renameAction', 'Rename')} ${this.props.branch.name}`}
             okButtonDisabled={disabled}
           />
         </DialogFooter>

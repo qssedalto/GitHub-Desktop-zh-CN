@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { t } from '../../lib/i18n'
 import { Account } from '../../models/account'
 import { IFilterListGroup } from '../lib/filter-list'
 import { IAPIRepository } from '../../lib/api'
@@ -188,7 +189,7 @@ export class CloneableRepositoryFilterList extends React.PureComponent<ICloneabl
         renderPostFilter={this.renderPostFilter}
         renderPreFilter={this.props.renderPreFilter}
         onItemClick={this.props.onItemClicked ? this.onItemClick : undefined}
-        placeholderText={'Filter your repositories'}
+        placeholderText={t('changes.filter', 'Filter your repositories')}
         getGroupAriaLabel={this.getGroupAriaLabelGetter(groups)}
       />
     )
@@ -258,7 +259,7 @@ export class CloneableRepositoryFilterList extends React.PureComponent<ICloneabl
   }
 
   private renderPostFilter = () => {
-    const tooltip = 'Refresh the list of repositories'
+    const tooltip = t('repositories.refresh', 'Refresh the list of repositories')
 
     return (
       <Button

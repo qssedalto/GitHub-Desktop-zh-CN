@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { t } from '../../lib/i18n'
 
 import { Branch } from '../../models/branch'
 
@@ -339,12 +340,12 @@ export class BranchList extends React.Component<
     return (
       <div className="branches-list-item-tooltip list-item-tooltip">
         <div>
-          <div className="label">Full Name: </div>
+          <div className="label">{t('branches.fullName', 'Full Name: ')}</div>
           {name}
         </div>
         {absoluteDate && (
           <div>
-            <div className="label">Last Modified: </div>
+            <div className="label">{t('branches.lastModified', 'Last Modified: ')}</div>
             {absoluteDate}
           </div>
         )}
@@ -387,11 +388,11 @@ export class BranchList extends React.Component<
 
   private getGroupLabel(identifier: BranchGroupIdentifier) {
     if (identifier === 'default') {
-      return __DARWIN__ ? 'Default Branch' : 'Default branch'
+      return t('branches.default', __DARWIN__ ? 'Default Branch' : 'Default branch')
     } else if (identifier === 'recent') {
-      return __DARWIN__ ? 'Recent Branches' : 'Recent branches'
+      return t('branches.recent', __DARWIN__ ? 'Recent Branches' : 'Recent branches')
     } else if (identifier === 'other') {
-      return __DARWIN__ ? 'Other Branches' : 'Other branches'
+      return t('branches.other', __DARWIN__ ? 'Other Branches' : 'Other branches')
     } else {
       return assertNever(identifier, `Unknown identifier: ${identifier}`)
     }
@@ -410,7 +411,7 @@ export class BranchList extends React.Component<
   private onRenderNewButton = () => {
     return this.props.canCreateNewBranch ? (
       <Button className="new-branch-button" onClick={this.onCreateNewBranch}>
-        {__DARWIN__ ? 'New Branch' : 'New branch'}
+        {t('branches.new', __DARWIN__ ? 'New Branch' : 'New branch')}
       </Button>
     ) : null
   }

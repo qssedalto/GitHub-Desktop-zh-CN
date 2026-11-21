@@ -17,6 +17,7 @@ import { ConfigLockFileExists } from './config-lock-file-exists'
 import { RadioButton } from './radio-button'
 import { Select } from './select'
 import { GitEmailNotFoundWarning } from './git-email-not-found-warning'
+import { t } from '../../lib/i18n'
 
 interface IConfigureGitUserProps {
   /** The logged-in accounts. */
@@ -185,7 +186,7 @@ export class ConfigureGitUser extends React.Component<
 
     return (
       <div id="commit-list" className="commit-list-example">
-        <div className="header">Example commit</div>
+        <div className="header">{t('gitUser.exampleCommit', 'Example commit')}</div>
 
         <CommitListItem
           commit={dummyCommit}
@@ -212,14 +213,18 @@ export class ConfigureGitUser extends React.Component<
     return (
       <div>
         <RadioButton
-          label={`Use my GitHub${accountTypeSuffix} account name and email address`}
+          label={
+            accountTypeSuffix
+              ? t('gitUser.enterpriseAccountInfo', 'Use my GitHub Enterprise account name and email address')
+              : t('gitUser.accountInfo', 'Use my GitHub account name and email address')
+          }
           checked={this.state.useGitHubAuthorInfo}
           onSelected={this.onUseGitHubInfoSelected}
           value="github-account"
           autoFocus={true}
         />
         <RadioButton
-          label="Configure manually"
+          label={t('gitUser.manual', 'Configure manually')}
           checked={!this.state.useGitHubAuthorInfo}
           onSelected={this.onUseGitConfigInfoSelected}
           value="git-config"
@@ -236,7 +241,7 @@ export class ConfigureGitUser extends React.Component<
     return (
       <>
         <Select
-          label="Email"
+          label={t('gitUser.email', 'Email')}
           value={this.state.gitHubEmail}
           onChange={this.onSelectedGitHubEmailChange}
         >
@@ -255,7 +260,7 @@ export class ConfigureGitUser extends React.Component<
       <>
         <TextBox
           type="email"
-          label="Email"
+          label={t('gitUser.email', 'Email')}
           placeholder="your-email@example.com"
           value={this.state.manualEmail}
           onValueChanged={this.onEmailChange}
@@ -276,8 +281,8 @@ export class ConfigureGitUser extends React.Component<
       <Form className="sign-in-form" onSubmit={this.save}>
         <div className="sign-in-form-inputs">
           <TextBox
-            label="Name"
-            placeholder="Your Name"
+            label={t('gitUser.name', 'Name')}
+            placeholder={t('gitUser.namePlaceholder', 'Your Name')}
             onValueChanged={this.onNameChange}
             value={
               this.state.useGitHubAuthorInfo

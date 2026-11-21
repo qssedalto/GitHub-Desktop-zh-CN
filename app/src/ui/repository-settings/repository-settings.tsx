@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { t } from '../../lib/i18n'
 import { TabBar, TabBarType } from '../tab-bar'
 import { Remote } from './remote'
 import { GitIgnore } from './git-ignore'
@@ -168,7 +169,7 @@ export class RepositorySettings extends React.Component<
     return (
       <Dialog
         id="repository-settings"
-        title={__DARWIN__ ? 'Repository Settings' : 'Repository settings'}
+        title={t('repository.settings', __DARWIN__ ? 'Repository Settings' : 'Repository settings')}
         onDismissed={this.props.onDismissed}
         onSubmit={this.onSubmit}
         disabled={this.state.disabled}
@@ -183,20 +184,20 @@ export class RepositorySettings extends React.Component<
           >
             <span>
               <Octicon className="icon" symbol={octicons.server} />
-              Remote
+              {t('repository.remote', 'Remote')}
             </span>
             <span>
               <Octicon className="icon" symbol={octicons.file} />
-              {__DARWIN__ ? 'Ignored Files' : 'Ignored files'}
+              {t('repository.ignoredFiles', __DARWIN__ ? 'Ignored Files' : 'Ignored files')}
             </span>
             <span>
               <Octicon className="icon" symbol={octicons.gitCommit} />
-              {__DARWIN__ ? 'Git Config' : 'Git config'}
+              {t('repository.gitConfig', __DARWIN__ ? 'Git Config' : 'Git config')}
             </span>
             {showForkSettings && (
               <span>
                 <Octicon className="icon" symbol={octicons.repoForked} />
-                {__DARWIN__ ? 'Fork Behavior' : 'Fork behavior'}
+                {t('repository.forkBehavior', __DARWIN__ ? 'Fork Behavior' : 'Fork behavior')}
               </span>
             )}
           </TabBar>
@@ -205,7 +206,7 @@ export class RepositorySettings extends React.Component<
         </div>
         <DialogFooter>
           <OkCancelButtonGroup
-            okButtonText="Save"
+            okButtonText={t('repository.save', 'Save')}
             okButtonDisabled={this.state.saveDisabled}
           />
         </DialogFooter>
@@ -308,14 +309,14 @@ export class RepositorySettings extends React.Component<
     return (
       <div className="repository-account">
         <Select
-          label="Account"
+          label={t('repository.account', 'Account')}
           value={this.selectedAccount?.login ?? login ?? ''}
           onChange={this.onAccountChanged}
         >
-          <option value="">None (unassigned)</option>
+          <option value="">{t('repository.unassigned', 'None (unassigned)')}</option>
           {signedOut && (
             <option value={login ?? ''} disabled={true}>
-              @{login} (signed out)
+              @{login} ({t('repository.signedOut', 'signed out')})
             </option>
           )}
           {accounts.map(account => (
@@ -325,8 +326,7 @@ export class RepositorySettings extends React.Component<
           ))}
         </Select>
         <p className="repository-account-description">
-          The account used for GitHub API requests and HTTPS authentication.
-          This does not change your Git author name or email.
+          {t('repository.accountExplanation', 'The account used for GitHub API requests and HTTPS authentication. This does not change your Git author name or email.')}
         </p>
       </div>
     )

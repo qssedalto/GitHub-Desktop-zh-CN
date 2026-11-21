@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { t } from '../../lib/i18n'
 
 import { Repository } from '../../models/repository'
 import { Dispatcher } from '../dispatcher'
@@ -187,8 +188,7 @@ export class CreateBranch extends React.Component<
     } else if (tip.kind === TipState.Unborn) {
       return (
         <p>
-          Your current branch is unborn (does not contain any commits). Creating
-          a new branch will rename the current branch.
+          {t('branch.unborn', 'Your current branch is unborn (does not contain any commits). Creating a new branch will rename the current branch.')}
         </p>
       )
     } else if (tip.kind === TipState.Valid) {
@@ -237,7 +237,7 @@ export class CreateBranch extends React.Component<
       >
         <DialogContent>
           <RefNameTextBox
-            label="Name"
+            label={t('branch.name', 'Name')}
             ariaDescribedBy={hasError ? this.ERRORS_ID : undefined}
             initialValue={this.props.initialName}
             onValueChange={this.onBranchNameChange}
@@ -272,7 +272,7 @@ export class CreateBranch extends React.Component<
       return this.props.headerText
     }
 
-    return __DARWIN__ ? 'Create a Branch' : 'Create a branch'
+    return t('branch.createTitle', __DARWIN__ ? 'Create a Branch' : 'Create a branch')
   }
 
   private getOkButtonText = (): string => {
@@ -280,7 +280,7 @@ export class CreateBranch extends React.Component<
       return this.props.okButtonText
     }
 
-    return __DARWIN__ ? 'Create Branch' : 'Create branch'
+    return t('branch.createAction', __DARWIN__ ? 'Create Branch' : 'Create branch')
   }
 
   private onBranchNameChange = (name: string) => {
@@ -559,7 +559,7 @@ export class CreateBranch extends React.Component<
   ) => (
     <Row>
       <VerticalSegmentedControl
-        label="Create branch based on…"
+        label={t('branch.createBase', 'Create branch based on…')}
         items={items}
         selectedKey={selectedValue}
         onSelectionChanged={this.onBaseBranchChanged}
