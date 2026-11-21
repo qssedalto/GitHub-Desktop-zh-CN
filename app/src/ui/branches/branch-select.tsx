@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { t } from '../../lib/i18n'
 import { IMatches } from '../../lib/fuzzy-find'
 import { Branch } from '../../models/branch'
 import { ClickSource } from '../lib/list'
@@ -111,14 +112,14 @@ export class BranchSelect extends React.Component<
 
     const buttonContent = (
       <>
-        <span className="popover-dropdown-button-label">base:</span>
+        <span className="popover-dropdown-button-label">{t('branches.base', 'base:')}</span>
         {selectedBranch?.name ?? ''}
       </>
     )
 
     return (
       <PopoverDropdown
-        contentTitle="Choose a base branch"
+        contentTitle={t('branches.chooseBase', 'Choose a base branch')}
         buttonContent={buttonContent}
         ref={this.popoverRef}
       >
