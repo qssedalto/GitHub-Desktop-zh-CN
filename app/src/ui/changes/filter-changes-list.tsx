@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { t } from '../../lib/i18n'
 import * as Path from 'path'
 
 import { Dispatcher } from '../dispatcher'
@@ -566,16 +567,12 @@ export class FilterChangesList extends React.Component<
       this.props.conflictState !== null ||
       hasConflictedFiles(this.props.workingDirectory)
 
-    const stashAllChangesLabel = __DARWIN__
-      ? 'Stash All Changes'
-      : 'Stash all changes'
-    const confirmStashAllChangesLabel = __DARWIN__
-      ? 'Stash All Changes…'
-      : 'Stash all changes…'
+    const stashAllChangesLabel = t('changes.stashAll', __DARWIN__ ? 'Stash All Changes' : 'Stash all changes')
+    const confirmStashAllChangesLabel = t('changes.stashAllConfirm', __DARWIN__ ? 'Stash All Changes…' : 'Stash all changes…')
 
     const items: IMenuItem[] = [
       {
-        label: __DARWIN__ ? 'Discard All Changes…' : 'Discard all changes…',
+        label: t('changes.discardAll', __DARWIN__ ? 'Discard All Changes…' : 'Discard all changes…'),
         action: this.onDiscardAllChanges,
         enabled: hasLocalChanges,
       },
@@ -1408,7 +1405,7 @@ export class FilterChangesList extends React.Component<
         <TextBox
           ref={this.onTextBoxRef}
           displayClearButton={true}
-          placeholder={'Filter'}
+          placeholder={t('changes.filter', 'Filter')}
           className="filter-list-filter-field"
           onValueChanged={this.onFilterTextChanged}
           onKeyDown={this.onFilterKeyDown}
