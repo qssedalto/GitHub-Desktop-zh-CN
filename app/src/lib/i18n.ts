@@ -239,29 +239,36 @@ const zhCN = {
 
 export type TranslationKey = keyof typeof zhCN
 
+/** Pure locale resolution for rendering code and unit tests. */
+export function resolveAppLanguage(
+  saved: string | null,
+  systemLanguage: string | undefined
+): AppLanguage {
+  if (saved === 'en' || saved === 'zh-CN') {
+    return saved
+  }
+
+  return /^zh(?:[-_]|$)/i.test(systemLanguage ?? '') ? 'zh-CN' : 'en'
+}
+
 /**
  * Respect an explicit choice first; otherwise use the system locale.
  * An unsupported or missing locale falls back to English.
  */
 export function getAppLanguage(): AppLanguage {
-  // A module can also be imported by unit tests outside Electron's renderer.
-  // Storage access may be unavailable or restricted there.
+  let saved: string | null = null
   try {
-    const saved =
-      typeof localStorage === 'undefined'
-        ? null
-        : localStorage.getItem(languageStorageKey)
-    if (saved === 'en' || saved === 'zh-CN') {
-      return saved
+    // Some unit tests import components without a browser environment.
+    if (typeof localStorage !== 'undefined') {
+      saved = localStorage.getItem(languageStorageKey)
     }
   } catch {
-    // Ignore inaccessible storage and fall back to the system language.
+    // Ignore inaccessible storage and use the system language.
   }
 
-  return typeof navigator !== 'undefined' &&
-    /^zh(?:[-_]|$)/i.test(navigator.language)
-    ? 'zh-CN'
-    : 'en'
+  const systemLanguage =
+    typeof navigator !== 'undefined' ? navigator.language : undefined
+  return resolveAppLanguage(saved, systemLanguage)
 }
 
 /** Returns the translation for the active language, with an English fallback. */
