@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { t } from '../../lib/i18n'
 import * as Path from 'path'
 import { Dispatcher } from '../dispatcher'
 import { addSafeDirectory, getRepositoryType } from '../../lib/git'
@@ -187,13 +188,13 @@ export class AddExistingRepository extends React.Component<
 
     const displayedMessage = (
       <>
-        <p>This directory does not appear to be a Git repository.</p>
+        <p>{t('repositories.directoryNotGit', 'This directory does not appear to be a Git repository.')}</p>
         <p>
-          Would you like to{' '}
+          {t('repositories.wantCreate', 'Would you like to')}{' '}
           <LinkButton onClick={this.onCreateRepositoryClicked}>
-            create a repository
+            {t('repositories.createHere', 'create a repository')}
           </LinkButton>{' '}
-          here instead?
+          {t('repositories.here', 'here instead?')}
         </p>
       </>
     )
@@ -230,7 +231,7 @@ export class AddExistingRepository extends React.Component<
     return (
       <Dialog
         id="add-existing-repository"
-        title={__DARWIN__ ? 'Add Local Repository' : 'Add local repository'}
+        title={t('repositories.addLocal', __DARWIN__ ? 'Add Local Repository' : 'Add local repository')}
         onSubmit={this.addRepository}
         onDismissed={this.props.onDismissed}
         loading={this.state.isTrustingRepository}
@@ -240,19 +241,19 @@ export class AddExistingRepository extends React.Component<
             <TextBox
               ref={this.pathTextBoxRef}
               value={this.state.path}
-              label={__DARWIN__ ? 'Local Path' : 'Local path'}
-              placeholder="repository path"
+              label={t('repositories.localPath', __DARWIN__ ? 'Local Path' : 'Local path')}
+              placeholder={t('repositories.pathPlaceholder', 'repository path')}
               onValueChanged={this.onPathChanged}
               ariaDescribedBy="add-existing-repository-path-error"
             />
-            <Button onClick={this.showFilePicker}>Choose…</Button>
+            <Button onClick={this.showFilePicker}>{t('repositories.choose', 'Choose…')}</Button>
           </Row>
           {this.renderErrors()}
         </DialogContent>
 
         <DialogFooter>
           <OkCancelButtonGroup
-            okButtonText={__DARWIN__ ? 'Add Repository' : 'Add repository'}
+            okButtonText={t('repositories.add', __DARWIN__ ? 'Add Repository' : 'Add repository')}
           />
         </DialogFooter>
       </Dialog>
